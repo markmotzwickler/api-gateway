@@ -1,0 +1,32 @@
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: 123
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka
+  instance:
+    hostname: localhost
+
+zuul:
+  host:
+    connect-timeout-millis: 5000000
+    socket-timeout-millis: 5000000
+  ignoredServices: '*'
+  routes:
+    user-service:
+      path: /user-service/**
+      serviceId: user-service
+      stripPrefix: false
+    post-service:
+      path: /post-service/**
+      serviceId: post-service
+      stripPrefix: false
+    oauth:
+      path: /oauth/**
+      url: http://localhost:8900
